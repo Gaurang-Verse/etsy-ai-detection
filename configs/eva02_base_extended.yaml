@@ -1,0 +1,62 @@
+# Ablation run — extended training + Cutout, per report Future Work (V.C.2, V.C.4).
+# Inherits everything from eva02_base.yaml except the fields below.
+
+data:
+  base_path: "/content/drive/MyDrive/[External] DCU 2026 ML challenge - external"
+  zip_name: "genai_image_challenge.zip"
+  images_dir: "/content/images"
+  train_csv: "train.csv"
+  test_csv: "test.csv"
+  image_id_col: "image_id"
+  label_col: "ground_truth"
+  val_size: 0.2
+  random_state: 42
+
+model:
+  backbone: "eva02_base_patch14_448.mim_in22k_ft_in22k_in1k"
+  img_size: 448
+  num_classes: 1
+  pretrained: true
+
+train:
+  batch_size: 16
+  epochs: 15
+  lr_head: 1.0e-3
+  lr_backbone: 2.0e-5
+  weight_decay: 0.01
+  warmup_epochs: 1
+  num_workers: 0
+  amp: true
+  device: "auto"
+
+loss:
+  name: "focal"
+  gamma: 2.0
+  alpha: 0.25
+
+aug:
+  horizontal_flip_p: 0.5
+  vertical_flip_p: 0.2
+  brightness_contrast_p: 0.4
+  brightness_limit: 0.2
+  contrast_limit: 0.2
+  affine_p: 0.5
+  affine_scale_min: 0.9
+  affine_scale_max: 1.1
+  affine_rotate_deg: 15.0
+  image_compression_p: 0.5
+  jpeg_quality_min: 60
+  jpeg_quality_max: 99
+  gauss_noise_p: 0.4
+  gauss_noise_var_min: 10.0
+  gauss_noise_var_max: 50.0
+  cutout_enabled: true
+  cutout_num_holes: 8
+  cutout_max_h_size: 32
+  cutout_max_w_size: 32
+
+output:
+  checkpoint_path: "/content/drive/MyDrive/best_eva02_extended_checkpoint.pth"
+  submission_path: "/content/drive/MyDrive/submission_eva02_extended.csv"
+  metadata_path: "/content/drive/MyDrive/experiment_summary_eva02_extended.json"
+  figures_dir: "/content/drive/MyDrive/figures_extended"

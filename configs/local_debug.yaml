@@ -1,0 +1,62 @@
+# Local smoke-test config — MacBook, CPU or MPS, no GPU required.
+# Point base_path/images_dir at a small local sample (a few dozen images)
+# before running. Do NOT use this config's results as real metrics — it
+# exists to confirm the code runs end-to-end before you take it to Colab.
+
+data:
+  base_path: "./data/sample"
+  zip_name: "genai_image_challenge.zip"
+  images_dir: "./data/sample/images"
+  train_csv: "train_sample.csv"
+  test_csv: "test_sample.csv"
+  image_id_col: "image_id"
+  label_col: "ground_truth"
+  val_size: 0.2
+  random_state: 42
+
+model:
+  # eva02_base is heavy for CPU — use the small variant locally.
+  backbone: "eva02_small_patch14_336.mim_in22k_ft_in1k"
+  img_size: 336
+  num_classes: 1
+  pretrained: true
+
+train:
+  batch_size: 4
+  epochs: 1
+  lr_head: 1.0e-3
+  lr_backbone: 2.0e-5
+  weight_decay: 0.01
+  warmup_epochs: 1
+  num_workers: 0
+  amp: false
+  device: "auto"
+
+loss:
+  name: "focal"
+  gamma: 2.0
+  alpha: 0.25
+
+aug:
+  horizontal_flip_p: 0.5
+  vertical_flip_p: 0.2
+  brightness_contrast_p: 0.4
+  brightness_limit: 0.2
+  contrast_limit: 0.2
+  affine_p: 0.5
+  affine_scale_min: 0.9
+  affine_scale_max: 1.1
+  affine_rotate_deg: 15.0
+  image_compression_p: 0.5
+  jpeg_quality_min: 60
+  jpeg_quality_max: 99
+  gauss_noise_p: 0.4
+  gauss_noise_var_min: 10.0
+  gauss_noise_var_max: 50.0
+  cutout_enabled: false
+
+output:
+  checkpoint_path: "./checkpoints/debug_checkpoint.pth"
+  submission_path: "./outputs/debug_submission.csv"
+  metadata_path: "./outputs/debug_summary.json"
+  figures_dir: "./outputs/figures"

@@ -1,0 +1,29 @@
+# Data & large artifacts — do not commit
+data/
+checkpoints/
+*.pth
+*.pt
+outputs/
+!outputs/.gitkeep
+*.zip
+*.csv
+!configs/*.csv
+
+# Except small sample fixtures used by tests, if any
+!tests/fixtures/**
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
