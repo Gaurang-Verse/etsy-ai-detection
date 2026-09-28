@@ -2,7 +2,7 @@
 # Reproduces the original notebook's result: Val F1 = 0.9144 at epoch 10.
 
 data:
-  base_path: "/content/drive/MyDrive/[External] DCU 2026 ML challenge - external"
+base_path: "/content/drive/MyDrive/etsy-ai-detection-data"
   zip_name: "genai_image_challenge.zip"
   images_dir: "/content/images"
   train_csv: "train.csv"
@@ -53,7 +53,7 @@ aug:
   cutout_enabled: false
 
 output:
-  checkpoint_path: "/content/drive/MyDrive/best_eva02_checkpoint.pth"
-  submission_path: "/content/drive/MyDrive/submission_eva02.csv"
-  metadata_path: "/content/drive/MyDrive/experiment_summary_eva02.json"
-  figures_dir: "/content/drive/MyDrive/figures"
+  checkpoint_path: "/content/drive/MyDrive/etsy-ai-detection-data/best_eva02_checkpoint.pth"
+  submission_path: "/content/drive/MyDrive/etsy-ai-detection-data/submission_eva02.csv"
+  metadata_path: "/content/drive/MyDrive/etsy-ai-detection-data/experiment_summary_eva02.json"
+  figures_dir: "/content/drive/MyDrive/etsy-ai-detection-data/figures"
