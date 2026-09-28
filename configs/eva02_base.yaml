@@ -2,7 +2,7 @@
 # Reproduces the original notebook's result: Val F1 = 0.9144 at epoch 10.
 
 data:
-base_path: "/content/drive/MyDrive/etsy-ai-detection-data"
+  base_path: "/content/drive/MyDrive/etsy-ai-detection-data"
   zip_name: "genai_image_challenge.zip"
   images_dir: "/content/images"
   train_csv: "train.csv"
